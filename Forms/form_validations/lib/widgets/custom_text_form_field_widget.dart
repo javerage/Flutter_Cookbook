@@ -5,6 +5,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final String? hintText;
   final TextInputType keyboardType;
   final TextCapitalization textCapitalization;
+  final TextEditingController? controller;
 
   const CustomTextFormFieldWidget({
     Key? key,
@@ -12,6 +13,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     this.hintText,
     this.keyboardType = TextInputType.none,
     this.textCapitalization = TextCapitalization.words,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 4),
       child: TextFormField(
+        controller: controller,
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,
         decoration: InputDecoration(

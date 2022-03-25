@@ -9,7 +9,22 @@ class CustomFormScreen extends StatefulWidget {
 }
 
 class _CustomFormScreenState extends State<CustomFormScreen> {
-  final _formKey = GlobalKey<FormState>();
+  late GlobalKey<FormState> _formKey;
+  late TextEditingController _firstNameController;
+  late TextEditingController _lastNameController;
+  late TextEditingController _phoneController;
+  late TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _phoneController = TextEditingController();
+    _emailController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,25 +34,29 @@ class _CustomFormScreenState extends State<CustomFormScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                const CustomTextFormFieldWidget(
+                CustomTextFormFieldWidget(
                   hintText: 'First Name',
                   labelText: 'First Name',
                   keyboardType: TextInputType.name,
+                  controller: _firstNameController,
                 ),
-                const CustomTextFormFieldWidget(
+                CustomTextFormFieldWidget(
                   hintText: 'Last Name',
                   labelText: 'Last Name',
                   keyboardType: TextInputType.name,
+                  controller: _lastNameController,
                 ),
-                const CustomTextFormFieldWidget(
+                CustomTextFormFieldWidget(
                   hintText: 'Phone',
                   labelText: 'Phone',
                   keyboardType: TextInputType.phone,
+                  controller: _phoneController,
                 ),
-                const CustomTextFormFieldWidget(
+                CustomTextFormFieldWidget(
                   hintText: 'Email',
                   labelText: 'Email',
                   keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
                 ),
                 const SizedBox(height: 20),
                 Center(
@@ -52,18 +71,29 @@ class _CustomFormScreenState extends State<CustomFormScreen> {
                       ),
                       child: Text('Submit'),
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Processing Data...')));
-                      }
-                    },
+                    onPressed: _sayHello,
                   ),
                 )
               ],
             ),
           ),
         ));
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  _sayHello() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              'Processing Data ${_firstNameController.text}, ${_lastNameController.text}, ${_phoneController.text}, ${_emailController.text}...')));
+    }
   }
 }
