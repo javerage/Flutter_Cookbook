@@ -15,7 +15,7 @@ class _CustomFormScreenState extends State<CustomFormScreen> {
     return Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 22),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -47,8 +47,8 @@ class _CustomFormScreenState extends State<CustomFormScreen> {
                     ),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
+                        horizontal: 30,
+                        vertical: 15,
                       ),
                       child: Text('Submit'),
                     ),

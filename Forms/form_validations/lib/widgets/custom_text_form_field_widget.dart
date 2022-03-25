@@ -16,14 +16,17 @@ class CustomTextFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      textCapitalization: textCapitalization,
-      decoration: InputDecoration(
-        labelText: labelText,
-        hintText: hintText,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10, top: 4),
+      child: TextFormField(
+        keyboardType: keyboardType,
+        textCapitalization: textCapitalization,
+        decoration: InputDecoration(
+          labelText: labelText,
+          hintText: hintText,
+        ),
+        validator: _validateNullOrEmpty,
       ),
-      validator: _validateNullOrEmpty,
     );
   }
 
